@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Frame 03 placeholder</title>
+  <desc id="desc">Minimal square portfolio placeholder in warm ivory, taupe and forest green.</desc>
+  <rect width="1080" height="1080" fill="#F7F3EA"/>
+  <rect x="80" y="80" width="920" height="920" fill="#EFE8DB" stroke="#B7AA98" stroke-width="2"/>
+  <path d="M220 260h640v560H220z" fill="#183427" opacity="0.06"/>
+  <path d="M260 764c130-142 230-212 350-218 82-4 142-32 210-104" fill="none" stroke="#183427" stroke-width="4" opacity="0.34"/>
+  <circle cx="344" cy="354" r="32" fill="#A88A55" opacity="0.26"/>
+  <text x="104" y="154" fill="#183427" font-family="Arial, sans-serif" font-size="34" font-weight="700" letter-spacing="14">FRAME 03</text>
+</svg>

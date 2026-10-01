@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kamila Meshaj - Media Review Contact Sheet</title>
+  <style>
+    :root {
+      --ivory: #f4efe3;
+      --ivory-deep: #e6ddc9;
+      --forest: #173424;
+      --forest-soft: #365442;
+      --ink-muted: #7a6f5f;
+      --line: rgba(23, 52, 36, 0.22);
+      --flag: #8a3f2d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--ivory);
+      color: var(--forest);
+      font-family: Manrope, Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.45;
+    }
+    header {
+      padding: 34px clamp(18px, 4vw, 58px) 28px;
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 12px;
+      color: var(--forest-soft);
+    }
+    h1 {
+      margin: 0;
+      max-width: 860px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(44px, 8vw, 104px);
+      font-weight: 400;
+      line-height: 0.94;
+      letter-spacing: 0;
+    }
+    .summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+      color: var(--forest-soft);
+    }
+    .summary span, nav a {
+      border: 1px solid var(--line);
+      padding: 8px 11px;
+      background: rgba(255, 255, 255, 0.22);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 11px;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 18px clamp(18px, 4vw, 58px);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(244, 239, 227, 0.93);
+      backdrop-filter: blur(12px);
+    }
+    nav a { color: var(--forest); text-decoration: none; }
+    main { padding: 8px clamp(18px, 4vw, 58px) 64px; }
+    .project-section { padding: 44px 0 20px; border-bottom: 1px solid var(--line); }
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px 24px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+    .section-heading p, .section-heading span {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 11px;
+      color: var(--ink-muted);
+    }
+    .section-heading h2 {
+      grid-column: 1;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 62px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+    .section-heading span { grid-column: 2; grid-row: 1 / span 2; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+    .media-card {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.28);
+      min-width: 0;
+    }
+    .media-card.is-flagged { border-color: rgba(138, 63, 45, 0.58); }
+    .thumb {
+      position: relative;
+      display: block;
+      min-height: 260px;
+      background: var(--ivory-deep);
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .thumb img {
+      display: block;
+      width: 100%;
+      height: 320px;
+      object-fit: contain;
+      background: #eee5d5;
+    }
+    .video-pill {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      padding: 7px 9px;
+      background: var(--forest);
+      color: var(--ivory);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+    }
+    .details { padding: 14px 14px 16px; }
+    .details p { margin: 0; }
+    .review-id {
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      font-size: 12px;
+      margin-bottom: 8px !important;
+    }
+    .filename {
+      font-size: 14px;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+      margin-bottom: 8px !important;
+    }
+    .meta {
+      color: var(--ink-muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 5px !important;
+    }
+    .assessment, .likely {
+      margin-top: 11px !important;
+      font-size: 13px;
+      color: var(--forest-soft);
+    }
+    .assessment span, .likely span { font-weight: 800; color: var(--forest); }
+    .quality {
+      margin-top: 11px !important;
+      color: var(--flag);
+      font-size: 13px;
+    }
+    .quality span {
+      display: inline-block;
+      margin-right: 6px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid currentColor;
+      padding: 2px 5px;
+    }
+    footer {
+      padding: 26px clamp(18px, 4vw, 58px) 44px;
+      color: var(--ink-muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+    @media (max-width: 680px) {
+      .section-heading { display: block; }
+      .section-heading span { display: inline-block; margin-top: 10px; }
+      .thumb img { height: 290px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="eyebrow">Kamila Meshaj portfolio curation</p>
+    <h1>Media Review Contact Sheet</h1>
+    <div class="summary">
+      <span>25 total items</span>
+      <span>21 images</span>
+      <span>4 video items</span>
+      <span>6 quality flagged</span>
+    </div>
+  </header>
+  <nav><a href="#ola-xhari">01 - Ola Xhari Hair Salon</a><a href="#laundry-room">02 - The Laundry Room</a><a href="#nail-content">03 - Beauty / Nail Content</a><a href="#public-campaigns">04 - Public Campaigns</a><a href="#unresolved">05 - Other / Unresolved</a></nav>
+  <main><section id="ola-xhari" class="project-section">
+      <div class="section-heading">
+        <p>OLA</p>
+        <h2>01 - Ola Xhari Hair Salon</h2>
+        <span>5 items</span>
+      </div>
+      <div class="grid"><article class="media-card">
+    <a class="thumb" href="ola-xhari/OLA-01.jpg" target="_blank" rel="noreferrer">
+      <img src="ola-xhari/OLA-01.jpg" alt="OLA-01 preview for A7CCA105-A8A2-40F0-9CE4-D8820B887DBD.PNG" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">OLA-01</p>
+      <p class="filename" title="A7CCA105-A8A2-40F0-9CE4-D8820B887DBD.PNG">A7CCA105-A8A2-40F0-9CE4-D8820B887DBD.PNG</p>
+      <p class="meta">IMAGE · 1254 x 1254 · SQUARE</p>
+      <p class="meta">Source: ola xhari</p>
+      <p class="assessment"><span>Assessment:</span> Strong candidate</p>
+      
+      
+    </div>
+  </article>
+<article class="media-card">
+    <a class="thumb" href="ola-xhari/OLA-02.jpg" target="_blank" rel="noreferrer">
+      <img src="ola-xhari/OLA-02.jpg" alt="OLA-02 preview for IMG_8232.jpg.jpeg" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">OLA-02</p>
+      <p class="filename" title="IMG_8232.jpg.jpeg">IMG_8232.jpg.jpeg</p>
+      <p class="meta">IMAGE · 1290 x 1748 · PORTRAIT</p>
+      <p class="meta">Source: ola xhari</p>
+      <p class="assessment"><span>Assessment:</span> Strong candidate</p>
+      
+      
+    </div>
+  </article>
+<article class="media-card">
+    <a class="thumb" href="ola-xhari/OLA-03.jpg" target="_blank" rel="noreferrer">
+      <img src="ola-xhari/OLA-03.jpg" alt="OLA-03 preview for IMG_8233.jpg.jpeg" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">OLA-03</p>
+      <p class="filename" title="IMG_8233.jpg.jpeg">IMG_8233.jpg.jpeg</p>
+      <p class="meta">IMAGE · 1290 x 2034 · PORTRAIT</p>
+      <p class="meta">Source: ola xhari</p>
+      <p class="assessment"><span>Assessment:</span> Strong candidate</p>
+      
+      
+    </div>
+  </article>
+<article class="media-card">
+    <a class="thumb" href="ola-xhari/OLA-04.jpg" target="_blank" rel="noreferrer">
+      <img src="ola-xhari/OLA-04.jpg" alt="OLA-04 preview for IMG_8234.jpg.jpeg" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">OLA-04</p>
+      <p class="filename" title="IMG_8234.jpg.jpeg">IMG_8234.jpg.jpeg</p>
+      <p class="meta">IMAGE · 1290 x 1609 · PORTRAIT</p>
+      <p class="meta">Source: ola xhari</p>
+      <p class="assessment"><span>Assessment:</span> Strong candidate</p>
+      
+      
+    </div>
+  </article>
+<article class="media-card">
+    <a class="thumb" href="ola-xhari/OLA-05.jpg" target="_blank" rel="noreferrer">
+      <img src="ola-xhari/OLA-05.jpg" alt="OLA-05 preview for Pink Red Modern Animated Envelope Opening Event Reels.MP4" loading="lazy">
+      <span class="video-pill">VIDEO / REEL</span>
+    </a>
+    <div class="details">
+      <p class="review-id">OLA-05</p>
+      <p class="filename" title="Pink Red Modern Animated Envelope Opening Event Reels.MP4">Pink Red Modern Animated Envelope Opening Event Reels.MP4</p>
+      <p class="meta">VIDEO · 1080 x 1920 · PORTRAIT · 0:06</p>
+      <p class="meta">Source: ola xhari</p>
+      <p class="assessment"><span>Assessment:</span> Strong candidate</p>
+      
+      
+    </div>
+  </article></div>
+    </section>
+<section id="laundry-room" class="project-section">
+      <div class="section-heading">
+        <p>LAU</p>
+        <h2>02 - The Laundry Room</h2>
+        <span>7 items</span>
+      </div>
+      <div class="grid"><article class="media-card">
+    <a class="thumb" href="laundry-room/LAU-01.jpg" target="_blank" rel="noreferrer">
+      <img src="laundry-room/LAU-01.jpg" alt="LAU-01 preview for 7CB9FF60-7E8F-4B84-A6F7-9A2649B79245.PNG" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">LAU-01</p>
+      <p class="filename" title="7CB9FF60-7E8F-4B84-A6F7-9A2649B79245.PNG">7CB9FF60-7E8F-4B84-A6F7-9A2649B79245.PNG</p>
+      <p class="meta">IMAGE · 1122 x 1402 · PORTRAIT</p>
+      <p class="meta">Source: laundry</p>
+      <p class="assessment"><span>Assessment:</span> Strong candidate</p>
+      
+      
+    </div>
+  </article>
+<article class="media-card">
+    <a class="thumb" href="laundry-room/LAU-02.jpg" target="_blank" rel="noreferrer">
+      <img src="laundry-room/LAU-02.jpg" alt="LAU-02 preview for B9D06FE6-36CE-4065-89B5-5AC827486599.PNG" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">LAU-02</p>
+      <p class="filename" title="B9D06FE6-36CE-4065-89B5-5AC827486599.PNG">B9D06FE6-36CE-4065-89B5-5AC827486599.PNG</p>
+      <p class="meta">IMAGE · 1122 x 1402 · PORTRAIT</p>
+      <p class="meta">Source: laundry</p>
+      <p class="assessment"><span>Assessment:</span> Strong candidate</p>
+      
+      
+    </div>
+  </article>
+<article class="media-card">
+    <a class="thumb" href="laundry-room/LAU-03.jpg" target="_blank" rel="noreferrer">
+      <img src="laundry-room/LAU-03.jpg" alt="LAU-03 preview for Black White Clean Minimalist Monogram Typography Logo.PNG" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">LAU-03</p>
+      <p class="filename" title="Black White Clean Minimalist Monogram Typography Logo.PNG">Black White Clean Minimalist Monogram Typography Logo.PNG</p>
+      <p class="meta">IMAGE · 2000 x 2000 · SQUARE</p>
+      <p class="meta">Source: laundry</p>
+      <p class="assessment"><span>Assessment:</span> Better as supporting media</p>
+      
+      
+    </div>
+  </article>
+<article class="media-card is-flagged">
+    <a class="thumb" href="laundry-room/LAU-04.jpg" target="_blank" rel="noreferrer">
+      <img src="laundry-room/LAU-04.jpg" alt="LAU-04 preview for IMG_7982.DNG" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">LAU-04</p>
+      <p class="filename" title="IMG_7982.DNG">IMG_7982.DNG</p>
+      <p class="meta">IMAGE · 6266 x 4698 · LANDSCAPE</p>
+      <p class="meta">Source: laundry</p>
+      <p class="assessment"><span>Assessment:</span> Needs review</p>
+      <p class="quality"><span>QUALITY FLAG</span>may need web-friendly derivative later</p>
+      
+    </div>
+  </article>
+<article class="media-card">
+    <a class="thumb" href="laundry-room/LAU-05.jpg" target="_blank" rel="noreferrer">
+      <img src="laundry-room/LAU-05.jpg" alt="LAU-05 preview for IMG_8235.jpg.jpeg" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">LAU-05</p>
+      <p class="filename" title="IMG_8235.jpg.jpeg">IMG_8235.jpg.jpeg</p>
+      <p class="meta">IMAGE · 1290 x 1704 · PORTRAIT</p>
+      <p class="meta">Source: laundry</p>
+      <p class="assessment"><span>Assessment:</span> Strong candidate</p>
+      
+      
+    </div>
+  </article>
+<article class="media-card">
+    <a class="thumb" href="laundry-room/LAU-06.jpg" target="_blank" rel="noreferrer">
+      <img src="laundry-room/LAU-06.jpg" alt="LAU-06 preview for IMG_8236.jpg.jpeg" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">LAU-06</p>
+      <p class="filename" title="IMG_8236.jpg.jpeg">IMG_8236.jpg.jpeg</p>
+      <p class="meta">IMAGE · 1290 x 1602 · PORTRAIT</p>
+      <p class="meta">Source: laundry</p>
+      <p class="assessment"><span>Assessment:</span> Strong candidate</p>
+      
+      
+    </div>
+  </article>
+<article class="media-card">
+    <a class="thumb" href="laundry-room/LAU-07.jpg" target="_blank" rel="noreferrer">
+      <img src="laundry-room/LAU-07.jpg" alt="LAU-07 preview for IMG_8237.jpg.jpeg" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">LAU-07</p>
+      <p class="filename" title="IMG_8237.jpg.jpeg">IMG_8237.jpg.jpeg</p>
+      <p class="meta">IMAGE · 1290 x 1905 · PORTRAIT</p>
+      <p class="meta">Source: laundry</p>
+      <p class="assessment"><span>Assessment:</span> Strong candidate</p>
+      
+      
+    </div>
+  </article></div>
+    </section>
+<section id="nail-content" class="project-section">
+      <div class="section-heading">
+        <p>NAIL</p>
+        <h2>03 - Beauty / Nail Content</h2>
+        <span>3 items</span>
+      </div>
+      <div class="grid"><article class="media-card">
+    <a class="thumb" href="nail-content/NAIL-01.jpg" target="_blank" rel="noreferrer">
+      <img src="nail-content/NAIL-01.jpg" alt="NAIL-01 preview for IMG_8238.jpg.jpeg" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">NAIL-01</p>
+      <p class="filename" title="IMG_8238.jpg.jpeg">IMG_8238.jpg.jpeg</p>
+      <p class="meta">IMAGE · 1290 x 2286 · PORTRAIT</p>
+      <p class="meta">Source: nail salon</p>
+      <p class="assessment"><span>Assessment:</span> Strong candidate</p>
+      
+      
+    </div>
+  </article>
+<article class="media-card">
+    <a class="thumb" href="nail-content/NAIL-02.jpg" target="_blank" rel="noreferrer">
+      <img src="nail-content/NAIL-02.jpg" alt="NAIL-02 preview for IMG_8240.jpg.jpeg" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">NAIL-02</p>
+      <p class="filename" title="IMG_8240.jpg.jpeg">IMG_8240.jpg.jpeg</p>
+      <p class="meta">IMAGE · 1290 x 1904 · PORTRAIT</p>
+      <p class="meta">Source: nail salon</p>
+      <p class="assessment"><span>Assessment:</span> Strong candidate</p>
+      
+      
+    </div>
+  </article>
+<article class="media-card">
+    <a class="thumb" href="nail-content/NAIL-03.jpg" target="_blank" rel="noreferrer">
+      <img src="nail-content/NAIL-03.jpg" alt="NAIL-03 preview for IMG_8241.jpg.jpeg" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">NAIL-03</p>
+      <p class="filename" title="IMG_8241.jpg.jpeg">IMG_8241.jpg.jpeg</p>
+      <p class="meta">IMAGE · 1290 x 2071 · PORTRAIT</p>
+      <p class="meta">Source: nail salon</p>
+      <p class="assessment"><span>Assessment:</span> Strong candidate</p>
+      
+      
+    </div>
+  </article></div>
+    </section>
+<section id="public-campaigns" class="project-section">
+      <div class="section-heading">
+        <p>PUB</p>
+        <h2>04 - Public Campaigns</h2>
+        <span>5 items</span>
+      </div>
+      <div class="grid"><article class="media-card">
+    <a class="thumb" href="public-campaigns/PUB-01.jpg" target="_blank" rel="noreferrer">
+      <img src="public-campaigns/PUB-01.jpg" alt="PUB-01 preview for IMG_8242.jpg.jpeg" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">PUB-01</p>
+      <p class="filename" title="IMG_8242.jpg.jpeg">IMG_8242.jpg.jpeg</p>
+      <p class="meta">IMAGE · 1290 x 1829 · PORTRAIT</p>
+      <p class="meta">Source: drejtoria</p>
+      <p class="assessment"><span>Assessment:</span> Possible candidate</p>
+      
+      
+    </div>
+  </article>
+<article class="media-card">
+    <a class="thumb" href="public-campaigns/PUB-02.jpg" target="_blank" rel="noreferrer">
+      <img src="public-campaigns/PUB-02.jpg" alt="PUB-02 preview for IMG_8243.jpg.jpeg" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">PUB-02</p>
+      <p class="filename" title="IMG_8243.jpg.jpeg">IMG_8243.jpg.jpeg</p>
+      <p class="meta">IMAGE · 1290 x 1891 · PORTRAIT</p>
+      <p class="meta">Source: drejtoria</p>
+      <p class="assessment"><span>Assessment:</span> Possible candidate</p>
+      
+      
+    </div>
+  </article>
+<article class="media-card">
+    <a class="thumb" href="public-campaigns/PUB-03.jpg" target="_blank" rel="noreferrer">
+      <img src="public-campaigns/PUB-03.jpg" alt="PUB-03 preview for IMG_8244.jpg.jpeg" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">PUB-03</p>
+      <p class="filename" title="IMG_8244.jpg.jpeg">IMG_8244.jpg.jpeg</p>
+      <p class="meta">IMAGE · 1290 x 2078 · PORTRAIT</p>
+      <p class="meta">Source: drejtoria</p>
+      <p class="assessment"><span>Assessment:</span> Possible candidate</p>
+      
+      
+    </div>
+  </article>
+<article class="media-card">
+    <a class="thumb" href="public-campaigns/PUB-04.jpg" target="_blank" rel="noreferrer">
+      <img src="public-campaigns/PUB-04.jpg" alt="PUB-04 preview for IMG_8245.jpg.jpeg" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">PUB-04</p>
+      <p class="filename" title="IMG_8245.jpg.jpeg">IMG_8245.jpg.jpeg</p>
+      <p class="meta">IMAGE · 1290 x 1954 · PORTRAIT</p>
+      <p class="meta">Source: drejtoria</p>
+      <p class="assessment"><span>Assessment:</span> Possible candidate</p>
+      
+      
+    </div>
+  </article>
+<article class="media-card">
+    <a class="thumb" href="public-campaigns/PUB-05.jpg" target="_blank" rel="noreferrer">
+      <img src="public-campaigns/PUB-05.jpg" alt="PUB-05 preview for IMG_8246.jpg.jpeg" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">PUB-05</p>
+      <p class="filename" title="IMG_8246.jpg.jpeg">IMG_8246.jpg.jpeg</p>
+      <p class="meta">IMAGE · 1290 x 2082 · PORTRAIT</p>
+      <p class="meta">Source: drejtoria</p>
+      <p class="assessment"><span>Assessment:</span> Possible candidate</p>
+      
+      
+    </div>
+  </article></div>
+    </section>
+<section id="unresolved" class="project-section">
+      <div class="section-heading">
+        <p>OTH</p>
+        <h2>05 - Other / Unresolved</h2>
+        <span>5 items</span>
+      </div>
+      <div class="grid"><article class="media-card is-flagged">
+    <a class="thumb" href="unresolved/OTH-01.jpg" target="_blank" rel="noreferrer">
+      <img src="unresolved/OTH-01.jpg" alt="OTH-01 preview for copy_D0BF7F35-8E54-4B3B-B2A7-82A5C7CDFBA7 2.MOV" loading="lazy">
+      <span class="video-pill">VIDEO / REEL</span>
+    </a>
+    <div class="details">
+      <p class="review-id">OTH-01</p>
+      <p class="filename" title="copy_D0BF7F35-8E54-4B3B-B2A7-82A5C7CDFBA7 2.MOV">copy_D0BF7F35-8E54-4B3B-B2A7-82A5C7CDFBA7 2.MOV</p>
+      <p class="meta">VIDEO · 1080 x 1920 · PORTRAIT · 0:11</p>
+      <p class="meta">Source: other</p>
+      <p class="assessment"><span>Assessment:</span> Needs review</p>
+      <p class="quality"><span>QUALITY FLAG</span>may need web-friendly derivative later</p>
+      <p class="likely"><span>Likely project:</span> unresolved, confidence low</p>
+    </div>
+  </article>
+<article class="media-card is-flagged">
+    <a class="thumb" href="unresolved/OTH-02.jpg" target="_blank" rel="noreferrer">
+      <img src="unresolved/OTH-02.jpg" alt="OTH-02 preview for IMG_6714.HEIC" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">OTH-02</p>
+      <p class="filename" title="IMG_6714.HEIC">IMG_6714.HEIC</p>
+      <p class="meta">IMAGE · 4357 x 7746 · PORTRAIT</p>
+      <p class="meta">Source: other</p>
+      <p class="assessment"><span>Assessment:</span> Needs review</p>
+      <p class="quality"><span>QUALITY FLAG</span>may need web-friendly derivative later</p>
+      <p class="likely"><span>Likely project:</span> Ola Xhari Hair Salon, confidence medium</p>
+    </div>
+  </article>
+<article class="media-card is-flagged">
+    <a class="thumb" href="unresolved/OTH-03.jpg" target="_blank" rel="noreferrer">
+      <img src="unresolved/OTH-03.jpg" alt="OTH-03 preview for IMG_7353.HEIC" loading="lazy">
+      
+    </a>
+    <div class="details">
+      <p class="review-id">OTH-03</p>
+      <p class="filename" title="IMG_7353.HEIC">IMG_7353.HEIC</p>
+      <p class="meta">IMAGE · 6048 x 8064 · PORTRAIT</p>
+      <p class="meta">Source: other</p>
+      <p class="assessment"><span>Assessment:</span> Needs review</p>
+      <p class="quality"><span>QUALITY FLAG</span>may need web-friendly derivative later</p>
+      <p class="likely"><span>Likely project:</span> Ola Xhari Hair Salon, confidence medium</p>
+    </div>
+  </article>
+<article class="media-card is-flagged is-low-quality">
+    <a class="thumb" href="unresolved/OTH-04.jpg" target="_blank" rel="noreferrer">
+      <img src="unresolved/OTH-04.jpg" alt="OTH-04 preview for v14044g50000dar42ovog65r484lfje0 2.MP4" loading="lazy">
+      <span class="video-pill">VIDEO / REEL</span>
+    </a>
+    <div class="details">
+      <p class="review-id">OTH-04</p>
+      <p class="filename" title="v14044g50000dar42ovog65r484lfje0 2.MP4">v14044g50000dar42ovog65r484lfje0 2.MP4</p>
+      <p class="meta">VIDEO · 576 x 1024 · PORTRAIT · 0:11</p>
+      <p class="meta">Source: other</p>
+      <p class="assessment"><span>Assessment:</span> Low technical quality</p>
+      <p class="quality"><span>QUALITY FLAG</span>low resolution for prominent web use</p>
+      <p class="likely"><span>Likely project:</span> unresolved, confidence low</p>
+    </div>
+  </article>
+<article class="media-card is-flagged">
+    <a class="thumb" href="unresolved/OTH-05.jpg" target="_blank" rel="noreferrer">
+      <img src="unresolved/OTH-05.jpg" alt="OTH-05 preview for v1c044g50000daporvnog65ln5qnvpd0 2.mov" loading="lazy">
+      <span class="video-pill">VIDEO / REEL</span>
+    </a>
+    <div class="details">
+      <p class="review-id">OTH-05</p>
+      <p class="filename" title="v1c044g50000daporvnog65ln5qnvpd0 2.mov">v1c044g50000daporvnog65ln5qnvpd0 2.mov</p>
+      <p class="meta">VIDEO · 1080 x 1920 · PORTRAIT · 0:18</p>
+      <p class="meta">Source: other</p>
+      <p class="assessment"><span>Assessment:</span> Needs review</p>
+      <p class="quality"><span>QUALITY FLAG</span>may need web-friendly derivative later</p>
+      <p class="likely"><span>Likely project:</span> unresolved, confidence low</p>
+    </div>
+  </article></div>
+    </section></main>
+  <footer>Temporary review artifact. Not connected to the website runtime.</footer>
+</body>
+</html>

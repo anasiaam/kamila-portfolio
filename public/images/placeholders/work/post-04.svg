@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Square work placeholder 04</title>
+  <desc id="desc">Minimal square campaign placeholder with restrained geometric details.</desc>
+  <rect width="1080" height="1080" fill="#F7F3EA"/>
+  <rect x="90" y="90" width="900" height="900" fill="#EFE8DB" stroke="#B7AA98" stroke-width="2"/>
+  <path d="M190 302h700M190 778h700" stroke="#183427" stroke-width="4" opacity="0.26"/>
+  <path d="M304 190v700M778 190v700" stroke="#183427" stroke-width="3" opacity="0.14"/>
+  <circle cx="540" cy="540" r="162" fill="#183427" opacity="0.06"/>
+  <circle cx="540" cy="540" r="88" fill="none" stroke="#A88A55" stroke-width="5" opacity="0.24"/>
+</svg>

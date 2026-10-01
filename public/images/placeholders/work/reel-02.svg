@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1440" role="img" aria-labelledby="title desc">
+  <title id="title">Portrait reel placeholder 02</title>
+  <desc id="desc">Minimal portrait reel placeholder with campaign frame details.</desc>
+  <rect width="900" height="1440" fill="#F7F3EA"/>
+  <rect x="72" y="92" width="756" height="1256" fill="#EFE8DB" stroke="#B7AA98" stroke-width="2"/>
+  <path d="M170 280h560M170 720h560M170 1160h560" stroke="#183427" stroke-width="4" opacity="0.2"/>
+  <circle cx="450" cy="720" r="156" fill="#183427" opacity="0.06"/>
+  <circle cx="450" cy="720" r="88" fill="none" stroke="#A88A55" stroke-width="5" opacity="0.22"/>
+  <path d="M424 650l116 70-116 70z" fill="#183427" opacity="0.3"/>
+</svg>

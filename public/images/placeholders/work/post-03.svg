@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Square work placeholder 03</title>
+  <desc id="desc">Minimal square work placeholder with offset editorial panels.</desc>
+  <rect width="1080" height="1080" fill="#F7F3EA"/>
+  <rect x="84" y="84" width="912" height="912" fill="#EFE8DB" stroke="#B7AA98" stroke-width="2"/>
+  <rect x="190" y="210" width="392" height="520" fill="#183427" opacity="0.08"/>
+  <rect x="500" y="340" width="374" height="418" fill="none" stroke="#183427" stroke-width="4" opacity="0.28"/>
+  <path d="M250 828c116-92 204-132 318-142 94-8 156-38 238-118" fill="none" stroke="#183427" stroke-width="4" opacity="0.32"/>
+</svg>

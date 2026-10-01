@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Square work placeholder 02</title>
+  <desc id="desc">Minimal square work placeholder with editorial grid lines.</desc>
+  <rect width="1080" height="1080" fill="#F7F3EA"/>
+  <rect x="96" y="96" width="888" height="888" fill="#EFE8DB" stroke="#B7AA98" stroke-width="2"/>
+  <path d="M216 216h648M216 540h648M216 864h648M216 216v648M540 216v648M864 216v648" stroke="#183427" stroke-width="3" opacity="0.18"/>
+  <rect x="270" y="270" width="540" height="540" fill="#183427" opacity="0.06"/>
+  <circle cx="540" cy="540" r="118" fill="none" stroke="#A88A55" stroke-width="4" opacity="0.24"/>
+</svg>
