@@ -225,15 +225,11 @@ export function GalleryCard({ item, compact = false }: GalleryCardProps) {
           />
         )}
       </div>
-      <figcaption
-        className={[
-          "work-gallery-caption eyebrow flex items-center gap-4 border-t border-border-soft px-4 py-3 text-green",
-          metadataType ? "justify-between" : "justify-start",
-        ].join(" ")}
-      >
-        <span>{item.label}</span>
-        {metadataType ? <span className="text-muted">{metadataType}</span> : null}
-      </figcaption>
+      {metadataType ? (
+        <figcaption className="work-gallery-caption eyebrow border-t border-border-soft px-4 py-3 text-green">
+          {metadataType}
+        </figcaption>
+      ) : null}
     </figure>
   );
 }

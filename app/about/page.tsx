@@ -28,7 +28,7 @@ const capabilities = [
   {
     number: "04",
     title: "Brand Communication",
-    items: ["Copy", "Customer-facing communication", "Social presence"],
+    items: ["Customer-facing communication", "Social presence"],
   },
 ];
 
